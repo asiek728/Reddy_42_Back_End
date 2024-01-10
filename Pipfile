@@ -5,6 +5,8 @@ name = "pypi"
 
 [scripts]
 dev="flask run"
+test = "ptw -- -v -rP"
+coverage = "pytest --cov=application --cov-report term-missing"
 
 [packages]
 flask = "*"
@@ -14,6 +16,10 @@ flask-sqlalchemy = "*"
 psycopg2-binary = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-flask-sqlalchemy = "*"
+pytest-watch = "*"
 
 [requires]
 python_version = "3"
