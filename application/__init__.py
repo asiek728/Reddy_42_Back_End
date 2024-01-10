@@ -12,5 +12,7 @@ app.json_provider_class.sort_keys = False
 CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
+app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 
 db = SQLAlchemy(app)
+
