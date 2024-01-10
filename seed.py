@@ -1,23 +1,32 @@
 from application import db
-from application.models import Character
+from application.models import Patient, Condition
 
-db.drop_all()
-print("Dropping Database")
+# db.metadata.drop_all(bind=None, tables=[Condition.__table__, Patient.__table__])
+# Condition.__table__.drop(db.engine)
+# Patient.__table__.drop(db.engine)
+# print("Dropping Database")
+
 
 db.create_all()
 print("Creating Database")
 
 print("Seeding Database")
-entry1 = Character(name="Phoebe", age=29, catch_phrase="My eyes, my eyes")
+patient1 = Patient(first_name="david", last_name="Fraser", email="email@email.com", password="encrypted", nhs_number=True, date_of_birth="2022-3-20", sex="m", ethnicity="white")
+patient2 = Patient(first_name="Joanna", last_name="looool", email="email@email.com", password="encrypted", nhs_number=True, date_of_birth="2022-3-20", sex="f", ethnicity="white")
+patient3 = Patient(first_name="yo mama", last_name="yo daddy", email="email@email.com", password="encrypted", nhs_number=True, date_of_birth="2022-3-20", sex="f", ethnicity="white")
+patient4 = Patient(first_name="alex", last_name="Warren", email="email@email.com", password="encrypted", nhs_number=True, date_of_birth="2022-3-20", sex="m", ethnicity="white")
+patient5 = Patient(first_name="leslie", last_name="jordan", email="email@email.com", password="encrypted", nhs_number=True, date_of_birth="2022-3-20", sex="f", ethnicity="white")
 
-entry2 = Character(name="Urkel", age=12, catch_phrase="Did I do that?")
-
-entry3 = Character(name="Edward Elric (FMA)", age=22, catch_phrase="Who are you calling short?")
-
-entry4 = Character(name="Uchiha Sasuke", age=12, catch_phrase="katon goukakyuu no jutsu")
-
-db.session.add(entry1)
-
-db.session.add_all([entry2, entry3, entry4])
-
+condition1 = Condition(patient_id=1, condition_name="dying", description="too much swag", start_date="2000-6-21", end_date="2024-5-12")
+condition2 = Condition(patient_id=3, condition_name="dying", description="too much swag", start_date="2000-6-21", end_date="2024-5-12")
+condition3 = Condition(patient_id=3, condition_name="dying", description="too much swag", start_date="2000-6-21", end_date="2024-5-12")
+condition4 = Condition(patient_id=4, condition_name="dying", description="too much swag", start_date="2000-6-21", end_date="2024-5-12")
+db.session.add_all([patient1, patient2, patient3, patient4, patient5, condition1, condition2, condition3, condition4])
+    # id = db.Column(db.Integer, primary_key=True)
+    # patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    # condition = db.Column(db.String(100), nullable=False)
+    # description = db.Column(db.String(100), nullable=False)
+    # start_date = db.Column(db.Date, nullable=False)
+    # end_date = db.Column(db.Date)
 db.session.commit()
+

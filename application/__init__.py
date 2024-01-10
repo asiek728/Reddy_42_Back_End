@@ -12,7 +12,10 @@ app.json_provider_class.sort_keys = False
 CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
-app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
+# app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+from application import routes
