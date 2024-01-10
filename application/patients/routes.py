@@ -4,7 +4,7 @@ from application import app # app from __init__.
 from .controller import get_patient_info, create_patient, update_patient, destroy_patient
 
 
-@app.route('/patient', methods=["POST"])
+@app.route('/patients', methods=["POST"])
 def handle_patients():
     if request.method == "POST": return create_patient()
 

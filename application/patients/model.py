@@ -23,7 +23,7 @@ class Patient(db.Model):
         self.email = email
         self.password = password
         self.nhs_number = nhs_number
-        self. date_of_birth = date_of_birth
+        self.date_of_birth = date_of_birth
         self.sex = sex
         self.ethnicity = ethnicity
     
@@ -41,5 +41,5 @@ class Patient(db.Model):
             "nhs_number": self.nhs_number,
             "date_of_birth": self.date_of_birth,
             "sex": self.sex,
-            "conditions": self.conditions,
+            "ethnicity": self.ethnicity
         }

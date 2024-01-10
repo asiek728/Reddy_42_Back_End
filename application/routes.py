@@ -1,6 +1,7 @@
 from application import app, db
 from flask import request, jsonify, render_template, redirect
-from application.models import Patient, Condition
+
+# from application.models import Patient, Condition
 
 @app.route('/')
 def hello():
@@ -29,14 +30,14 @@ def hello():
 #         'ethnicity': patient.ethnicity
 #     }
 
-def format_condition(condition):
-    return {
-        'patient_id ': condition.patient_id ,
-        'condition_name': condition.condition_name,
-        'description': condition.description,
-        'start_date': condition.start_date,
-        'end_date': condition.end_date,
-    }
+# def format_condition(condition):
+#     return {
+#         'patient_id ': condition.patient_id ,
+#         'condition_name': condition.condition_name,
+#         'description': condition.description,
+#         'start_date': condition.start_date,
+#         'end_date': condition.end_date,
+#     }
 
 #patient route----------------------------------------------------------------------------------------------------
 
@@ -71,43 +72,43 @@ def format_condition(condition):
 
 #condition routes-----------------------------------------------------------------------------------------------------
 
-@app.route("/condition") #WORKING!
-def get_conditions():
-    conditions = Condition.query.all()
-    print(conditions)
-    condition_list = []
-    for condition in conditions:
-        condition_list.append(format_condition(condition))
-    return jsonify(condition_list)
+# @app.route("/condition") #WORKING!
+# def get_conditions():
+#     conditions = Condition.query.all()
+#     print(conditions)
+#     condition_list = []
+#     for condition in conditions:
+#         condition_list.append(format_condition(condition))
+#     return jsonify(condition_list)
 
-@app.route("/condition/<id>") #WORKING!
-def get_condition_by_id(id):
-    condition = Condition.query.filter_by(id=id).first()
-    return jsonify(format_condition(condition))
+# @app.route("/condition/<id>") #WORKING!
+# def get_condition_by_id(id):
+#     condition = Condition.query.filter_by(id=id).first()
+#     return jsonify(format_condition(condition))
 
-@app.route("/condition", methods=["POST"]) #WORKING!
-def create_condition():
-    data = request.json
-    condition = Condition(data['patient_id'], data['condition_name'], data['description'], data['start_date'], data['end_date'])
-    db.session.add(condition)
-    db.session.commit()
-    return jsonify(format_condition(condition))
+# @app.route("/condition", methods=["POST"]) #WORKING!
+# def create_condition():
+#     data = request.json
+#     condition = Condition(data['patient_id'], data['condition_name'], data['description'], data['start_date'], data['end_date'])
+#     db.session.add(condition)
+#     db.session.commit()
+#     return jsonify(format_condition(condition))
 
-@app.route("/condition/<id>", methods=["PATCH"]) #WORKING!
-def update_condition(id):
-    condition = Condition.query.filter_by(id=id)
-    data = request.json
-    condition.update(dict(patient_id=data['patient_id'], condition_name=data['condition_name'], description=data['description'],start_date=data['start_date'], end_date=data['end_date']))
-    db.session.commit()
-    updatedCondition = condition.first() 
-    return jsonify(format_condition(updatedCondition))
+# @app.route("/condition/<id>", methods=["PATCH"]) #WORKING!
+# def update_condition(id):
+#     condition = Condition.query.filter_by(id=id)
+#     data = request.json
+#     condition.update(dict(patient_id=data['patient_id'], condition_name=data['condition_name'], description=data['description'],start_date=data['start_date'], end_date=data['end_date']))
+#     db.session.commit()
+#     updatedCondition = condition.first() 
+#     return jsonify(format_condition(updatedCondition))
 
-@app.route("/condition/<id>", methods=['DELETE'])
-def destroy_condition(id):
-    condition = Condition.query.filter_by(id=id).first()
-    db.session.delete(condition)
-    db.session.commit()
-    return f"Condition deleted {id}"
+# @app.route("/condition/<id>", methods=['DELETE'])
+# def destroy_condition(id):
+#     condition = Condition.query.filter_by(id=id).first()
+#     db.session.delete(condition)
+#     db.session.commit()
+#     return f"Condition deleted {id}"
 
 #chat routes----------------------------------------------------------------------------------------------------------
 
