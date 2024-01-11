@@ -3,14 +3,14 @@ from application import db, app
 app.app_context().push()
 
 class Patient(db.Model):
-    __tablename__ = "patients"
+    # __tablename__ = "patients"
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
-    nhs_number = db.Column(db.Boolean)
+    nhs_number = db.Column(db.String(100))
     date_of_birth = db.Column(db.Date, nullable=False, default=(2003, 3, 25)) #YMD format date_of_birth=date(2003,3,25)
     sex = db.Column(db.String(1), nullable=False)
     ethnicity = db.Column(db.String(100))

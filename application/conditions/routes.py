@@ -3,13 +3,13 @@ from werkzeug import exceptions
 from application import app # app from __init__.
 from .controller import get_conditions, get_condition_by_id, create_condition, update_condition, destroy_condition
 
-@app.route('/condition', methods=["GET", "POST"])
+@app.route('/conditions', methods=["GET", "POST"])
 def handle_conditions():
     if request.method == "POST": return create_condition()
     if request.method == "GET": return get_conditions()
 
 
-@app.route('/condition/<int:id>', methods=["GET", "PATCH", "DELETE"])
+@app.route('/conditions/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def handle_condition(id):
     if request.method == "GET": return get_condition_by_id(id)
     if request.method == "PATCH": return update_condition(id)

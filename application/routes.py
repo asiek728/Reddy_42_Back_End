@@ -1,7 +1,7 @@
 from application import app, db
 from flask import request, jsonify, render_template, redirect
 
-# from application.models import Patient, Condition
+from application.patients.model import Patient
 
 @app.route('/')
 def hello():
@@ -13,6 +13,11 @@ def hello():
             "Get /history/id -fetches patient medical history"
         ]
     }), 200
+
+@app.route('/testing')
+def testing():
+    return {"test1": ['The test has worked!']}
+ 
 
 
 # @app.route('/add_dummy_data')
@@ -41,12 +46,12 @@ def hello():
 
 #patient route----------------------------------------------------------------------------------------------------
 
-# @app.route("/patient/<id>") #WORKING!
+# @app.route("/patients/<id>") #WORKING!
 # def get_patient_info(id):
 #     patient = Patient.query.filter_by(id=id).first()
 #     return jsonify(format_patient(patient))
 
-# @app.route("/patient", methods=['POST']) #WORKING!
+# @app.route("/patients", methods=['POST']) #WORKING!
 # def create_patient():
 #     data = request.json
 #     patient = Patient(data['first_name'], data['last_name'], data['email'], data['password'], data['nhs_number'], data['date_of_birth'], data['sex'], data['ethnicity'])
@@ -54,7 +59,7 @@ def hello():
 #     db.session.commit()
 #     return f"{patient} added succesfully"
 
-# @app.route("/patient/<id>", methods=['PATCH']) #WORKING!
+# @app.route("/patients/<id>", methods=['PATCH']) #WORKING!
 # def update_patient(id):
 #     patient = Patient.query.filter_by(id=id)
 #     data = request.json
@@ -63,7 +68,7 @@ def hello():
 #     updatedPatient = patient.first() 
 #     return jsonify(format_patient(updatedPatient))
 
-# @app.route("/patient/<id>", methods=['DELETE']) #WORKING!
+# @app.route("/patients/<id>", methods=['DELETE']) #WORKING!
 # def destroy_patient(id):
 #     patient = Patient.query.filter_by(id=id).first()
 #     db.session.delete(patient)

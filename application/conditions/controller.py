@@ -8,7 +8,7 @@ def get_conditions():
     try:
         return jsonify({ "data": [c.json for c in condition] }), 200
     except:
-        raise exceptions.InternalServerError(f"Condition not found!")
+        raise exceptions.InternalServerError(f"Conditions not found!")
 
 def get_condition_by_id(id):
     print("id", type(id))

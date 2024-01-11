@@ -1,10 +1,11 @@
 from application import db, app
+from application.patients.model import Patient
 
 app.app_context().push()
 
 class Condition(db.Model):
 
-    __tablename__ = "conditions"
+    # __tablename__ = "conditions"
 
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
