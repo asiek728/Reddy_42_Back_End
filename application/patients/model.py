@@ -1,8 +1,10 @@
 from application import db, app
 
+from flask_login import UserMixin
+
 app.app_context().push()
 
-class Patient(db.Model):
+class Patient(db.Model, UserMixin):
     # __tablename__ = "patients"
 
     id = db.Column(db.Integer, primary_key=True)

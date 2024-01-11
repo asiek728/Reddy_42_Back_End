@@ -18,13 +18,13 @@ CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
 # app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-login_manager = LoginManager()
-login_manager.init_app(app)
+# login_manager = LoginManager()
+# # login_manager.login_view = "auth.login"
+# login_manager.init_app(app)
 
 from application.patients.routes import patients
 app.register_blueprint(patients)

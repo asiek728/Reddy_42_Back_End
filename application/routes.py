@@ -1,7 +1,7 @@
 from application import app, db
 from flask import request, jsonify, render_template, redirect
 
-from application.patients.model import Patient
+# from application.patients.model import Patient
 
 @app.route('/')
 def hello():
