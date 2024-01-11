@@ -5,6 +5,8 @@ name = "pypi"
 
 [scripts]
 dev="flask run"
+test = "ptw -- -v -rP"
+coverage = "pytest --cov=application --cov-report term-missing"
 
 [packages]
 flask = "*"
@@ -12,6 +14,7 @@ flask-cors = "*"
 python-dotenv = "*"
 flask-sqlalchemy = "*"
 psycopg2-binary = "*"
+<<<<<<< HEAD
 werkzeug = "*"
 certifi = "==2023.11.17"
 charset-normalizer = "==3.3.2"
@@ -26,8 +29,15 @@ virtualenv = "==20.25.0"
 gunicorn = "==19.7.1"
 python-dateutil = "==2.8.2"
 flask-login = "*"
+=======
+gunicorn = "*"
+>>>>>>> b1c9899835a686c56743b87e92369fd0bdcc299a
 
 [dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-flask-sqlalchemy = "*"
+pytest-watch = "*"
 
 [requires]
 python_version = "3"
