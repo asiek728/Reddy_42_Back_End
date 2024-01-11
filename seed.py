@@ -7,6 +7,8 @@ from application.models import Patient, Condition
 # print("Dropping Database")
 
 
+db.drop_all()
+
 db.create_all()
 print("Creating Database")
 
