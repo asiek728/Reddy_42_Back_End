@@ -1,26 +1,22 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO
 from dotenv import load_dotenv
+from flask_socketio import SocketIO
 import os
-
-
-socketio = SocketIO(cors_allowed_origins="*")
 
 load_dotenv()
 
 app = Flask(__name__)
 app.json_provider_class.sort_keys = False
-CORS(app)
-
-
+allowed_origins = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"]
+CORS(app, origins=allowed_origins)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['SECRET_KEY'] = os.environ["SECRET"]
 db = SQLAlchemy(app)
-socketio.init_app(app)
 
+socketio = SocketIO(app, cors_allowed_origins=allowed_origins)
 
 from application import routes
