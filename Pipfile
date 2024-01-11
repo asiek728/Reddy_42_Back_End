@@ -32,6 +32,7 @@ flask-login = "*"
 =======
 gunicorn = "*"
 >>>>>>> b1c9899835a686c56743b87e92369fd0bdcc299a
+flask-socketio = "*"
 
 [dev-packages]
 pytest = "*"

@@ -10,6 +10,8 @@ from application.conditions.model import Condition
 # print("Dropping Database")
 
 
+db.drop_all()
+
 db.create_all()
 print("Creating Database")
 

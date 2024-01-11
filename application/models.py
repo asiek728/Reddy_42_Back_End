@@ -72,8 +72,9 @@
 
 
 
-# class Chat(db.Model):
-#     pass 
+
+#chat
+
 
 # class GP(db.Model):
 #     pass
