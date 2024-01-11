@@ -22,24 +22,4 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-<<<<<<< HEAD
-# login_manager = LoginManager()
-# # login_manager.login_view = "auth.login"
-# login_manager.init_app(app)
-
-from application.patients.routes import patients
-app.register_blueprint(patients)
-
-
-
-
-
-
-
-
-
 from application import routes
-
-=======
-from application import routes
->>>>>>> b1c9899835a686c56743b87e92369fd0bdcc299a
