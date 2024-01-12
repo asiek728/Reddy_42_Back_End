@@ -28,7 +28,6 @@ virtualenv = "==20.25.0"
 gunicorn = "==19.7.1"
 python-dateutil = "==2.8.2"
 flask-login = "*"
-gunicorn = "*"
 flask-socketio = "*"
 
 [dev-packages]
