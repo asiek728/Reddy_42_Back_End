@@ -17,3 +17,12 @@ class Message(db.Model):
 
     def __repr__(self):
         return f"Message('{self.room}', '{self.author}', '{self.content}', '{self.time}')"
+    
+    def json(self):
+        return {
+            'id': self.id,
+            'room': self.room,
+            'author': self.author,
+            'content': self.content,
+            'time': self.time
+        }

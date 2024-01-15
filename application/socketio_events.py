@@ -1,7 +1,7 @@
 from flask_socketio import emit, join_room
 from flask_socketio import SocketIO
 from application import db
-from application.messages.models import Message
+from application.messages.model import Message
 from flask_cors import CORS
 from flask import request
 
@@ -17,6 +17,13 @@ def init_socketio_events(socketio):
         room = data['room']
         join_room(room)
         print(f'User with ID: {request.sid} joined room: {room}')
+
+    @socketio.on('user_joined')
+    def handle_user_joined(data):
+        room = data['room']
+        username = data['username']
+        print(data)
+        emit('receive_message', {'content': f'{username} joined the room', 'author': 'System', 'time': 'now'}, room=room)
 
     @socketio.on('send_message')
     def handle_send_message(data):
@@ -38,6 +45,14 @@ def init_socketio_events(socketio):
         except Exception as e:
             print(f"Error saving message: {e}")
 
+    
+
+    # @socketio.on('user_left')
+    # def handle_user_left(data):
+    #     room = data['room']
+    #     username = data['username']
+    #     emit('receive_message', {'content': f'{username} left the room.', 'author': 'System', 'time': 'now'}, room=room)
+        
     @socketio.on('disconnect')
     def handle_disconnect():
         print(f'User Disconnected: {request.sid}')
