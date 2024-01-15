@@ -3,6 +3,7 @@ from application import db
 from application.patients.model import Patient, TokenBlocklist
 from application.conditions.model import Condition
 import images
+from application.messages.model import Message
 
 # from application.models import Condition, Patient
 

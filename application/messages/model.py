@@ -1,4 +1,6 @@
-from application import db
+from application import db, app
+
+app.app_context().push()
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,3 +17,12 @@ class Message(db.Model):
 
     def __repr__(self):
         return f"Message('{self.room}', '{self.author}', '{self.content}', '{self.time}')"
+    
+    def json(self):
+        return {
+            'id': self.id,
+            'room': self.room,
+            'author': self.author,
+            'content': self.content,
+            'time': self.time
+        }

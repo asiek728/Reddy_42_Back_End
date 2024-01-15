@@ -106,3 +106,6 @@ from application import routes
 socketio = SocketIO(app, cors_allowed_origins=allowed_origins)
 
 from application import routes
+
+from application.socketio_events import init_socketio_events
+init_socketio_events(socketio)
