@@ -16,9 +16,9 @@ flask-sqlalchemy = "*"
 psycopg2-binary = "*"
 
 [dev-packages]
-pytest = "*"
 pytest-cov = "*"
 pytest-flask-sqlalchemy = "*"
+pytest = "*"
 pytest-watch = "*"
 
 [requires]

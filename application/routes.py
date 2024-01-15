@@ -102,7 +102,7 @@ def update_condition(id):
     updatedCondition = condition.first() 
     return jsonify(format_condition(updatedCondition))
 
-@app.route("/condition/<id>", methods=['DELETE'])
+@app.route("/condition/<id>", methods=['DELETE']) #WORKING!
 def destroy_condition(id):
     condition = Condition.query.filter_by(id=id).first()
     db.session.delete(condition)
