@@ -56,4 +56,4 @@ def init_socketio_events(socketio):
     @socketio.on('disconnect')
     def handle_disconnect():
         print(f'User Disconnected: {request.sid}')
-        emit('user_left', {'username': get_username(request.sid), 'room': get_room(request.sid)})
+        # emit('user_left', {'username': get_username(request.sid), 'room': get_room(request.sid)})
