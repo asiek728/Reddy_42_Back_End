@@ -56,7 +56,7 @@ def user_lookup_callback(_jwt_headers, jwt_data):
 
 @jwt.additional_claims_loader
 def make_additional_claims(identity):
-    if identity == "demo@email.com":
+    if identity == "NHS@email.com":
         return {"is_staff": True}
     return {"is_staff": False}
 
