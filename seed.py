@@ -30,13 +30,13 @@ binary_image_data2 = base64.b64decode(images.base64_image_data2)
 binary_image_data3 = base64.b64decode(images.base64_image_data3)
 binary_image_data4 = base64.b64decode(images.base64_image_data4)
 
-condition1 = Condition(patient_id=1, condition_name="broken leg", description="reckless jumping off the curb", start_date="2023-6-21", end_date="2024-5-12", image= binary_image_data )
+condition1 = Condition(patient_email="email10@email.com", condition_name="broken leg", description="reckless jumping off the curb", start_date="2023-6-21", end_date="2024-5-12", image= binary_image_data )
 
-condition2 = Condition(patient_id=3, condition_name="abdominal pain", description="pain caused by eating too much chocolate", start_date="2000-6-16", end_date="2024-5-12", image= binary_image_data2)
+condition2 = Condition(patient_email="email12@email.com", condition_name="abdominal pain", description="pain caused by eating too much chocolate", start_date="2000-6-16", end_date="2024-5-12", image= binary_image_data2)
 
-condition3 = Condition(patient_id=3, condition_name="chest pain", description="winter flu", start_date="2000-6-08", end_date="2024-5-12", image= binary_image_data3)
+condition3 = Condition(patient_email="email12@email.com", condition_name="chest pain", description="winter flu", start_date="2000-6-08", end_date="2024-5-12", image= binary_image_data3)
 
-condition4 = Condition(patient_id=4, condition_name="broken leg", description="reckless jumping off the curb", start_date="2023-6-21", end_date="2024-5-12", image= binary_image_data )
+condition4 = Condition(patient_email="email12@email.com", condition_name="broken leg", description="reckless jumping off the curb", start_date="2023-6-21", end_date="2024-5-12", image= binary_image_data )
 
 db.session.add_all([patient1, patient2, patient3, patient4, patient5, condition1, condition2, condition3, condition4])
 # db.session.add_all([condition1, condition2, condition3, condition4])
