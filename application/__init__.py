@@ -27,14 +27,15 @@ from flask_jwt_extended import (
 app = Flask(__name__)
 app.json_provider_class.sort_keys = False
 allowed_origins = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"]
-CORS(app, origins=allowed_origins)
+# CORS(app, origins=allowed_origins)
+
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
 
 db = SQLAlchemy(app)
-
 
 
 ###################################################################
@@ -55,7 +56,7 @@ def user_lookup_callback(_jwt_headers, jwt_data):
 
 @jwt.additional_claims_loader
 def make_additional_claims(identity):
-    if identity == "alextesting2@test.com":
+    if identity == "demo@email.com":
         return {"is_staff": True}
     return {"is_staff": False}
 

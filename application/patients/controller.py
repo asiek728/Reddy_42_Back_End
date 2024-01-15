@@ -129,11 +129,11 @@ def get_all_users():
     return jsonify({"message": "You are not authorized to access this"}), 401
 
 def whoami():
-    # claims = get_jwt()
+    claims = get_jwt()
     return jsonify(
         {
             "message": "testing", 
-            # "claims":claims, #can remove this 
+            "claims":claims, #can remove this 
             "user_details": {
                 "first_name": current_user.first_name,
                 "email": current_user.email,
