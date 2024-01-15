@@ -53,6 +53,8 @@ def create_patient():
 
         new_patient = Patient(first_name=data.get("first_name"), last_name=data.get("last_name"), email=data.get("email"), password=data.get("password"), nhs_number=data.get("nhs_number"), date_of_birth=data.get("date_of_birth"), sex=data.get("sex"), ethnicity=data.get("ethnicity"))
 
+        print(new_patient)
+
         new_patient.set_password(password=data.get("password"))
 
         db.session.add(new_patient)
