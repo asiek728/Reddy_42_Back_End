@@ -1,6 +1,7 @@
 from application import db
 from application.patients.model import Patient
 from application.conditions.model import Condition
+from application.messages.models import Message
 
 # from application.models import Condition, Patient
 

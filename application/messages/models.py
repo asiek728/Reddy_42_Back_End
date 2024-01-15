@@ -1,4 +1,6 @@
-from application import db
+from application import db, app
+
+app.app_context().push()
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)

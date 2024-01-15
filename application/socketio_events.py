@@ -5,9 +5,6 @@ from application.messages.models import Message
 from flask_cors import CORS
 from flask import request
 
-# socketio = SocketIO()
-
-# CORS(socketio)
 
 
 def init_socketio_events(socketio):
@@ -29,7 +26,17 @@ def init_socketio_events(socketio):
         author = data['author']
         time = data['time']
 
-        emit('receive_message', data, room=room)
+        new_message = Message(room=room, author=author, content=message_content, time=time)
+
+        try:
+            db.session.add(new_message)
+            
+            db.session.commit()
+
+            emit('receive_message', data, room=room)
+
+        except Exception as e:
+            print(f"Error saving message: {e}")
 
     @socketio.on('disconnect')
     def handle_disconnect():
