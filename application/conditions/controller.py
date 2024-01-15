@@ -3,12 +3,23 @@ from werkzeug import exceptions
 from .model import Condition
 from .. import db
 
+
 def get_conditions():
     condition = Condition.query.all()
     try:
         return jsonify({ "data": [c.json for c in condition] }), 200
     except:
         raise exceptions.InternalServerError(f"Conditions not found!")
+    
+
+def get_user_conditions(patient_id):
+    print("patient_id", type(id))
+    conditions = Condition.query.filter_by(patient_id=patient_id).all()
+    try:
+        return jsonify({ "data": [c.json for c in conditions] }), 200
+    except:
+        raise exceptions.InternalServerError(f"User history not found!")
+
 
 def get_condition_by_id(id):
     print("id", type(id))
