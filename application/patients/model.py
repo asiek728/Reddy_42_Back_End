@@ -1,21 +1,30 @@
 from application import db, app
-
-from flask_login import UserMixin
+from uuid import uuid4
+from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 app.app_context().push()
 
-class Patient(db.Model, UserMixin):
+def generate_uuid():
+    return uuid4()
+
+
+class Patient(db.Model):
     # __tablename__ = "patients"
 
+    #Doesnt seem to work with uuid
+    # id = db.Column(db.String(), primary_key=True, default=str(generate_uuid))
+    
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(500), nullable=False)
     nhs_number = db.Column(db.String(100))
     date_of_birth = db.Column(db.Date, nullable=False, default=(2003, 3, 25)) #YMD format date_of_birth=date(2003,3,25)
     sex = db.Column(db.String(1), nullable=False)
     ethnicity = db.Column(db.String(100))
+    
     # foreign keys
     conditions = db.relationship('Condition',backref='patient', lazy=True, cascade="all, delete")
     
@@ -31,7 +40,31 @@ class Patient(db.Model, UserMixin):
     
     def __repr__(self):
         return f"My name is {self.first_name} {self.last_name} i was born {self.date_of_birth} and my email is {self.email}"
+    
+###################################################################
+    ## AUTH
+    def __repr__(self):
+        return f"<User {self.first_name}>"
 
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+    
+    @classmethod
+    def get_user_by_email(cls, email):
+        return cls.query.filter_by(email=email).first()
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+######################################################################
+    
     @property
     def json(self):
         return {
@@ -45,3 +78,20 @@ class Patient(db.Model, UserMixin):
             "sex": self.sex,
             "ethnicity": self.ethnicity
         }
+    
+#####################################################################
+
+class TokenBlocklist(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    jti = db.Column(db.String(), nullable=True)
+    create_at = db.Column(db.DateTime(), default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<Token {self.jti}>"
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+###################################################################

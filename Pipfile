@@ -10,7 +10,6 @@ coverage = "pytest --cov=application --cov-report term-missing"
 
 [packages]
 flask = "*"
-flask-cors = "*"
 python-dotenv = "*"
 flask-sqlalchemy = "*"
 psycopg2-binary = "*"
@@ -25,10 +24,11 @@ platformdirs = "==4.1.0"
 requests = "==2.31.0"
 urllib3 = "==2.1.0"
 virtualenv = "==20.25.0"
-gunicorn = "==19.7.1"
 python-dateutil = "==2.8.2"
 flask-login = "*"
+gunicorn = "*"
 flask-socketio = "*"
+flask-cors = "*"
 
 [dev-packages]
 pytest = "*"
