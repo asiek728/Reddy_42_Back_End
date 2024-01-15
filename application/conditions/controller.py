@@ -2,6 +2,7 @@ from flask import jsonify, request
 from werkzeug import exceptions
 from .model import Condition
 from .. import db
+import base64
 
 
 def get_conditions():
@@ -31,16 +32,19 @@ def get_condition_by_id(id):
 
 
 def create_condition():
-    try:
-        condition_id, condition_name, description, start_date, end_date = request.json.values()
+    #try:
+        patient_id, condition_name, description, start_date, end_date, image = request.json.values()
 
-        new_condition = Condition(condition_id, condition_name, description, start_date, end_date)
+        binary_image = base64.b64decode(image)
+
+
+        new_condition = Condition(patient_id, condition_name, description, start_date, end_date, binary_image)
 
         db.session.add(new_condition)
         db.session.commit()
 
         return jsonify({ "data": new_condition.json }), 201
-    except:
+    #except:
         raise exceptions.BadRequest(f"We cannot process your request")
 
 def update_condition(id):
@@ -58,4 +62,4 @@ def destroy_condition(id):
     condition = Condition.query.filter_by(id=id).first()
     db.session.delete(condition)
     db.session.commit()
-    return "Patient Deleted", 204
+    return "Condition Deleted", 204

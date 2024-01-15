@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 
 from dotenv import load_dotenv
+from flask_socketio import SocketIO
 import os
 load_dotenv()
 
@@ -25,12 +26,12 @@ from flask_jwt_extended import (
 
 app = Flask(__name__)
 app.json_provider_class.sort_keys = False
-
-CORS(app)
-
+allowed_origins = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"]
+CORS(app, origins=allowed_origins)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
 
 db = SQLAlchemy(app)
 
@@ -97,3 +98,6 @@ def token_in_blocklist_callback(jwt_header,jwt_data):
 
 from application import routes
 
+socketio = SocketIO(app, cors_allowed_origins=allowed_origins)
+
+from application import routes
