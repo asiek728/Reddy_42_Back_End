@@ -23,8 +23,6 @@ from flask_jwt_extended import (
 )
 #################################################
 
-
-
 app = Flask(__name__)
 app.json_provider_class.sort_keys = False
 allowed_origins = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"]
@@ -40,7 +38,6 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 
 db = SQLAlchemy(app)
-
 
 ###################################################################
 #register blueprints:
@@ -104,8 +101,6 @@ def token_in_blocklist_callback(jwt_header,jwt_data):
 from application import routes
 
 socketio = SocketIO(app, cors_allowed_origins=allowed_origins)
-
-from application import routes
 
 from application.socketio_events import init_socketio_events
 init_socketio_events(socketio)

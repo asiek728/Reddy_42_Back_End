@@ -1,12 +1,14 @@
-from flask import request
+from flask import request, jsonify, Blueprint
 from werkzeug import exceptions
 from application import app # app from __init__.
 from .controller import get_conditions, get_condition_by_id, create_condition, update_condition, destroy_condition, get_user_conditions
 
 from flask_jwt_extended import jwt_required, get_jwt
 
+conditions = Blueprint("conditions", __name__)
+
 @app.route('/conditions', methods=["GET", "POST"])
-# @jwt_required()
+@jwt_required()
 def handle_conditions():
     if request.method == "POST": return create_condition()
     if request.method == "GET": return get_conditions()

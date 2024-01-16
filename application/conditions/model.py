@@ -29,7 +29,8 @@ class Condition(db.Model):
     def get_conditions_by_email(cls, email):
         return cls.query.filter_by(email=email).all()
     
-
+    def __repr__(self):
+        return f"<User {self.patient_email}>"
     
 #$#############################################
     @property
@@ -45,3 +46,4 @@ class Condition(db.Model):
             "end_date": self.end_date,
             "image_data_base64": image_data_base64
         }
+    
