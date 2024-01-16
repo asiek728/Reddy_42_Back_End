@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
+from datetime import timedelta
 
 from dotenv import load_dotenv
 from flask_socketio import SocketIO
@@ -34,6 +35,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
+
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 
 db = SQLAlchemy(app)
 
@@ -102,3 +106,6 @@ from application import routes
 socketio = SocketIO(app, cors_allowed_origins=allowed_origins)
 
 from application import routes
+
+from application.socketio_events import init_socketio_events
+init_socketio_events(socketio)
