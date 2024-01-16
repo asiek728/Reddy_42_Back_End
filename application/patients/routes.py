@@ -11,9 +11,10 @@ patients = Blueprint("patients", __name__)
 @app.route('/patients', methods=["GET", "POST"])
 def handle_patients():
     if request.method == "POST": return create_patient()
-    if request.method == "GET": return get_patients()
+   #  if request.method == "GET": return get_patients() - #/all is ne version  
 
 @app.route('/patients/<int:id>', methods=["GET", "PATCH", "DELETE"])
+@jwt_required()
 def handle_patient(id):
     if request.method == "GET": return get_patient_info(id)
     if request.method == "PATCH": return update_patient(id)
