@@ -1,8 +1,11 @@
-def test_create_condition(create_condition):
-    condition = create_condition
+from application.conditions.model import Condition
 
-    assert condition.patient_id == 1
-    assert condition.condition_name == 'dying'
-    assert condition.description == "too much swag"
-    assert condition.start_date == "2000-6-21"
+def test_create_condition():
+    condition = Condition("email10@email.com", "broken leg", "2reckless jumping off the curb", "2024-5-12", "2024-5-12", "/9j/4AAQSkZJRgABAQAAA" )
+
+    assert condition.patient_email == "email10@email.com"
+    assert condition.condition_name == "broken leg"
+    assert condition.description == "2reckless jumping off the curb"
+    assert condition.start_date == "2024-5-12"
     assert condition.end_date == "2024-5-12"
+    assert condition.image == "/9j/4AAQSkZJRgABAQAAA"
