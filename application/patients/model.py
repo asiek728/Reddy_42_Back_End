@@ -30,12 +30,7 @@ class Patient(db.Model):
     
     # foreign keys
     conditions = db.relationship('Condition',backref='patient', lazy=True, cascade="all, delete")
-
-    ############################################################ BREAKS TESTING
-    # hereditary_conditions = db.relationship('HereditaryCondition',backref='patient', lazy=True, cascade="all, delete")
-
-    ############################################################
-
+    hereditary_conditions = db.relationship('HereditaryCondition',backref='patient', lazy=True, cascade="all, delete")
 
     # Define the many-to-many relationship
     related_patients = db.relationship(

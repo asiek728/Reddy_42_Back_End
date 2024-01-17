@@ -8,7 +8,7 @@ from flask_jwt_extended import jwt_required, get_jwt
 conditions = Blueprint("conditions", __name__)
 
 @app.route('/conditions', methods=["GET", "POST"])
-@jwt_required()
+# @jwt_required()
 def handle_conditions():
     if request.method == "POST": return create_condition()
     if request.method == "GET": return get_conditions()
