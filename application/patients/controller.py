@@ -29,6 +29,7 @@ def get_patients():
         return jsonify({ "data": [c.json for c in patient] }), 200
     except:
         raise exceptions.InternalServerError(f"Patient not found!")
+    
 
 def get_patient_info(id):
     print("id", type(id))
