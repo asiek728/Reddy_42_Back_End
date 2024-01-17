@@ -3,16 +3,6 @@ from werkzeug import exceptions
 from .model import HereditaryCondition
 from .. import db
 
-from flask_jwt_extended import (
-    create_access_token,
-    create_refresh_token,
-    jwt_required,
-    get_jwt,
-    current_user,
-    get_jwt_identity,
-)
-
-from flask_jwt_extended import jwt_required, get_jwt
 from application.patients.model import Patient, TokenBlocklist
 from schemas import UserSchema
 

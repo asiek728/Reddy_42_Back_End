@@ -43,13 +43,5 @@ patient2.related_to.append(patient1)
 
 db.session.add_all([patient1, patient2, patient3, patient4, patient5, condition1, condition2, condition3, condition4, hereditary_condition1, hereditary_condition2, hereditary_condition3])
 
-
-# db.session.add_all([condition1, condition2, condition3, condition4])
-    # id = db.Column(db.Integer, primary_key=True)
-    # patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
-    # condition = db.Column(db.String(100), nullable=False)
-    # description = db.Column(db.String(100), nullable=False)
-    # start_date = db.Column(db.Date, nullable=False)
-    # end_date = db.Column(db.Date)
 db.session.commit()
 

@@ -12,4 +12,3 @@ def test_create_patient():
     assert new_patient.sex == "M"
     assert new_patient.ethnicity == "White"
 
-
