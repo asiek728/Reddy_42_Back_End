@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
-dev="flask run"
+dev="python app.py"
 test = "ptw -- -v -rP"
 coverage = "pytest --cov=application --cov-report term-missing"
 
@@ -28,8 +28,8 @@ python-dateutil = "==2.8.2"
 flask-login = "*"
 gunicorn = "*"
 flask-socketio = "*"
-flask-cors = "*"
 flask-jwt-extended = "*"
+cors = "*"
 
 [dev-packages]
 pytest = "*"
