@@ -1,6 +1,7 @@
 from flask import request, jsonify, Blueprint
 from werkzeug import exceptions
 from application import app # app from __init__.
+from .model import Patient
 from .controller import get_patient_info, create_patient,  get_patients, login_user, get_all_users, whoami, refresh_access, logout_user, get_user_family
 
 from flask_jwt_extended import jwt_required, get_jwt
@@ -12,6 +13,14 @@ patients = Blueprint("patients", __name__)
 def handle_patients():
     if request.method == "POST": return create_patient()
     if request.method == "GET": return get_patients()  #/all is ne version  
+    
+@app.route("/patients/email/<string:email>", methods=["GET"])
+def patient_by_email(email):
+    patient = Patient.get_user_by_email(email)
+    try:
+        return jsonify({ "data": patient.json }),200
+    except:
+        raise exceptions.NotFound(f"Patient not found!")
 
 @app.route('/patients/<patient_email>', methods=["GET", "PATCH", "DELETE"])
 #@jwt_required()

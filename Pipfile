@@ -29,13 +29,13 @@ flask-login = "*"
 gunicorn = "*"
 flask-socketio = "*"
 flask-jwt-extended = "*"
-cors = "*"
+marshmallow = "*"
 
 [dev-packages]
-pytest = "*"
 pytest-cov = "*"
 pytest-flask-sqlalchemy = "*"
 pytest-watch = "*"
+pytest = "*"
 
 [requires]
 python_version = "3"
