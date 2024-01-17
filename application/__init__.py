@@ -9,15 +9,6 @@ from flask_socketio import SocketIO
 import os
 load_dotenv()
 
-# from flask_jwt_extended import (
-#     create_access_token,
-#     create_refresh_token,
-#     jwt_required,
-#     get_jwt,
-#     current_user,
-#     get_jwt_identity,
-# )
-
 app = Flask(__name__)
 app.json_provider_class.sort_keys = False
 allowed_origins = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"]
@@ -34,12 +25,6 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=100)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 
 db = SQLAlchemy(app)
-
-#####################################################################
-
-
-
-####################################################################
 
 from application.patients.model import Patient, TokenBlocklist
 

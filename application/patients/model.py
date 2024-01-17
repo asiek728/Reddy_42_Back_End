@@ -17,9 +17,6 @@ patient_family = db.Table(
 
 class Patient(db.Model):
     # __tablename__ = "patients"
-
-    #Doesnt seem to work with uuid
-    # id = db.Column(db.String(), primary_key=True, default=str(generate_uuid))
     
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
@@ -33,7 +30,12 @@ class Patient(db.Model):
     
     # foreign keys
     conditions = db.relationship('Condition',backref='patient', lazy=True, cascade="all, delete")
-    hereditary_conditions = db.relationship('HereditaryCondition',backref='patient', lazy=True, cascade="all, delete")
+
+    ############################################################ BREAKS TESTING
+    # hereditary_conditions = db.relationship('HereditaryCondition',backref='patient', lazy=True, cascade="all, delete")
+
+    ############################################################
+
 
     # Define the many-to-many relationship
     related_patients = db.relationship(
