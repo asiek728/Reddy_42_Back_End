@@ -2,6 +2,7 @@ from application import app, socketio, routes ## app from __init__.py
 
 from application.patients import routes
 from application.conditions import routes
+from application.hereditary_conditions import routes
 from application.messages import routes
 
 if __name__ == "__main__":

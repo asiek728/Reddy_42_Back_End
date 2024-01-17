@@ -29,20 +29,47 @@ def get_patients():
         return jsonify({ "data": [c.json for c in patient] }), 200
     except:
         raise exceptions.InternalServerError(f"Patient not found!")
+    
 
-def get_patient_info(id):
-    print("id", type(id))
-    patient = Patient.query.filter_by(id=id).first()
+def get_patient_info(patient_email):
+    # print("id", type(id))
+    patient = Patient.query.filter_by(email=patient_email).first()
     try:
         return jsonify({ "data": patient.json }), 200
     except:
         raise exceptions.NotFound(f"Patient not found!")
+    
+def get_user_family(patient_email):
+    patient = Patient.query.filter_by(email=patient_email).first()
+
+    if not patient:
+        return jsonify({'error': 'Patient not found'}), 404
+    
+    family_members = patient.related_to
+
+    family_data = []
+    for member in family_members:
+        hereditary_conditions = []
+        for condition in member.hereditary_conditions:
+            hereditary_conditions.append({"id": condition.id,"hereditary_condition_name": condition.hereditary_condition_name})
+        family_data.append({
+            'first_name': member.first_name,
+            'last_name': member.last_name,
+            'email': member.email,
+            "hereditary_conditions": hereditary_conditions or ""
+        })
+
+    try:
+        return jsonify({'family_members': family_data}), 200
+    except:
+        raise exceptions.InternalServerError(f"User history not found!")
+
 
 ###################################
 # @auth_bp.post("/register")
 ###################################
 def create_patient():
-    try:
+    # try:
     ######################################################
         data = request.get_json()
 
@@ -62,27 +89,27 @@ def create_patient():
     ######################################################
 
         return jsonify({ "data": new_patient.json }), 201
-    except:
+    # except:
         raise exceptions.BadRequest(f"We cannot process your request, sorry :(")
 
 
-def update_patient(id):
-    data = request.json
-    patient = Patient.query.filter_by(id=id).first()
+# def update_patient(id):
+#     data = request.json
+#     patient = Patient.query.filter_by(id=id).first()
 
-    for (attribute, value) in data.items():
-        if hasattr(patient, attribute):
-            setattr(patient, attribute, value)
+#     for (attribute, value) in data.items():
+#         if hasattr(patient, attribute):
+#             setattr(patient, attribute, value)
 
-    db.session.commit()
-    return jsonify({ "data": patient.json })
+#     db.session.commit()
+#     return jsonify({ "data": patient.json })
 
 
-def destroy_patient(id):
-    patient = Patient.query.filter_by(id=id).first()
-    db.session.delete(patient)
-    db.session.commit()
-    return "Patient Deleted", 204
+# def destroy_patient(id):
+#     patient = Patient.query.filter_by(id=id).first()
+#     db.session.delete(patient)
+#     db.session.commit()
+#     return "Patient Deleted", 204
 
 #################################################################
 def login_user():
