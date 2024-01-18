@@ -27,13 +27,13 @@ def get_user_conditions(email):
         raise exceptions.InternalServerError(f"User history not found!")
 
 
-def get_condition_by_id(id):
-    print("id", type(id))
-    condition = HereditaryCondition.query.filter_by(id=id).first()
-    try:
-        return jsonify({ "data": condition.json }), 200
-    except:
-        raise exceptions.NotFound(f"Hereditary Condition not found!")
+# def get_condition_by_id(id):
+#     print("id", type(id))
+#     condition = HereditaryCondition.query.filter_by(id=id).first()
+#     try:
+#         return jsonify({ "data": condition.json }), 200
+#     except:
+#         raise exceptions.NotFound(f"Hereditary Condition not found!")
 
 
 def create_condition():
@@ -49,19 +49,19 @@ def create_condition():
     except:
         raise exceptions.BadRequest(f"We cannot process your request")
 
-def update_condition(id):
-    data = request.json
-    condition = HereditaryCondition.query.filter_by(id=id).first()
+# def update_condition(id):
+#     data = request.json
+#     condition = HereditaryCondition.query.filter_by(id=id).first()
 
-    for (attribute, value) in data.items():
-        if hasattr(condition, attribute):
-            setattr(condition, attribute, value)
+#     for (attribute, value) in data.items():
+#         if hasattr(condition, attribute):
+#             setattr(condition, attribute, value)
 
-    db.session.commit()
-    return jsonify({ "data": condition.json })
+#     db.session.commit()
+#     return jsonify({ "data": condition.json })
 
-def destroy_condition(id):
-    condition = HereditaryCondition.query.filter_by(id=id).first()
-    db.session.delete(condition)
-    db.session.commit()
-    return "Hereditary Condition Deleted", 204
+# def destroy_condition(id):
+#     condition = HereditaryCondition.query.filter_by(id=id).first()
+#     db.session.delete(condition)
+#     db.session.commit()
+#     return "Hereditary Condition Deleted", 204

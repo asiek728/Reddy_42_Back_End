@@ -1,7 +1,7 @@
 from flask import request, jsonify, Blueprint
 from werkzeug import exceptions
 from application import app # app from __init__.
-from .controller import get_conditions, get_condition_by_id, create_condition, update_condition, destroy_condition, get_user_conditions
+from .controller import get_conditions, get_condition_by_id, create_condition,get_user_conditions  #,  update_condition, destroy_condition, 
 
 from flask_jwt_extended import jwt_required, get_jwt
 
@@ -24,8 +24,8 @@ def handle_user_conditions(patient_email):
 # @jwt_required()
 def handle_condition(id):
     if request.method == "GET": return get_condition_by_id(id)
-    if request.method == "PATCH": return update_condition(id)
-    if request.method == "DELETE": return destroy_condition(id)
+    # if request.method == "PATCH": return update_condition(id)
+    # if request.method == "DELETE": return destroy_condition(id)
 
 
 @app.errorhandler(exceptions.NotFound)

@@ -27,7 +27,7 @@ class Condition(db.Model):
 #$#############################################
     @classmethod
     def get_conditions_by_email(cls, email):
-        return cls.query.filter_by(email=email).all()
+        return cls.query.filter_by(patient_email=email).all()
     
     def __repr__(self):
         return f"<User {self.patient_email}>"
