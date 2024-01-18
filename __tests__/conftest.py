@@ -19,10 +19,12 @@ def client():
         # Create the database
         db.create_all()
         # Create fake data
-        new_patient = Patient(first_name="first_name", last_name="last_name", email="email", password="password", nhs_number="nhs_number", date_of_birth="date_of_birth", sex="sex", ethnicity="ethnicity", )
+        new_patient = Patient(first_name="Alex", last_name="Test", email="test@test.com", password="scrypt:32768:8:1$FziQurZHW63D8KxO$b29242e517474db51f24472ea864b4597641b44478e8ef739817222d46cee63087d7bd539cf79e04042642ed9de429c30a532527476776c41495b916028077b2", nhs_number="True", date_of_birth="2000-6-16", sex="m", ethnicity="White" )
+
+        new_condition = Condition(patient_email="test@test.com", condition_name="Test", description="make a pain", start_date="2000-6-16", end_date="2000-6-16", image="True")
 
         # Inject it into the database
-        db.session.add(new_patient)
+        db.session.add(new_patient, new_condition)
         db.session.commit()
 
     return client

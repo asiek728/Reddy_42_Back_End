@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: postgres:14
+    container_name: reddy_42
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=BE_DB
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d/:ro
+volumes:
+  dbdata:
+    name: BE_Database

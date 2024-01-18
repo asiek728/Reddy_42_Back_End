@@ -1,7 +1,7 @@
 from flask import request, jsonify, Blueprint
 from werkzeug import exceptions
 from application import app # app from __init__.
-from .controller import get_conditions, get_condition_by_id, create_condition, update_condition, destroy_condition, get_user_conditions
+from .controller import get_conditions, get_condition_by_id, create_condition, get_user_conditions, update_condition, destroy_condition
 
 from flask_jwt_extended import jwt_required, get_jwt
 

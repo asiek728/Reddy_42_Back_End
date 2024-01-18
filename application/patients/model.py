@@ -40,7 +40,7 @@ class Patient(db.Model):
         primaryjoin=(email == patient_family.c.patient_email),
         secondaryjoin=(email == patient_family.c.related_patient_email),
         backref='related_to'
-)
+    )   
     
     def __init__(self, first_name, last_name, email, password, nhs_number, date_of_birth, sex, ethnicity):
         self.first_name = first_name

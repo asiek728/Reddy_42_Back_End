@@ -1,31 +1,26 @@
 import json
 
-# Testing the overall functionality - is the route rendering the correct data?
 def test_index_page(client):
     response = client.get("/")
     print(response.data)
     assert response.status_code == 200
-    assert response.data == b'<p>Hello, World!</p>'
+    assert response.data == b"<p>Welcome to the back end!</p>"
     
-# # GET /characters
-# def test_characters_page(client):
-#     response = client.get("/characters")
+# def test_patients_page(client):
+#     response = client.get("/patients")
 #     assert response.status_code == 200
 #     data = json.loads(response.data)
     
-#     assert data[0]['name'] == 'Test'
-#     assert data[0]['age'] == 0
-#     assert data[0]['catch_phrase'] == 'I am a test'
-    
-# # GET/:id characters
-# def test_character_page(client):
-#     response = client.get('/characters/1')
-#     assert response.status_code == 200
-    
-#     data = json.loads(response.data)
-#     print(data)
-#     assert len(data) == 4
-#     assert data['id'] == 1
-#     assert data['name'] == 'Test'
-#     assert data['age'] == 0
-#     assert data['catch_phrase'] == 'I am a test'
+#     # assert data.first_name == 'Alex'
+#     # assert data[0]['last_name'] == 'Test'
+#     # assert data['email'] == "test@test.com"
+#     # assert data[0]['password'] == "scrypt:32768:8:1$FziQurZHW63D8KxO$b29242e517474db51f24472ea864b4597641b44478e8ef739817222d46cee63087d7bd539cf79e04042642ed9de429c30a532527476776c41495b916028077b2"
+#     # assert data[0]['nhs_number'] =='True'
+#     # assert data[0]['date_of_birth'] == '2000-6-16'
+#     # assert data[0]['sex'] == 'm'
+#     # assert data[0]['ethnicity'] == "White"
+
+def test_conditions_page(client):
+    response = client.get("/conditions")
+    assert response.status_code == 200
+    data = json.loads(response.data)

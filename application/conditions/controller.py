@@ -19,16 +19,16 @@ from schemas import UserSchema
 
 
 def get_conditions():
-    claims = get_jwt()
+    # claims = get_jwt()
 
-    if claims.get("is_staff") == True:
+    # if claims.get("is_staff") == True:
         condition = Condition.query.all()
         try:
             return jsonify({ "data": [c.json for c in condition] }), 200
         except:
             raise exceptions.InternalServerError(f"Conditions not found!")
         
-    return jsonify({"message": "You are not authorized to access this"}), 401
+    # return jsonify({"message": "You are not authorized to access this"}), 401
     
 
 def get_user_conditions(patient_email):
