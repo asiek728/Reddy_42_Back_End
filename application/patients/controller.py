@@ -63,6 +63,31 @@ def get_user_family(patient_email):
         return jsonify({'family_members': family_data}), 200
     except:
         raise exceptions.InternalServerError(f"User history not found!")
+    
+
+def create_relationship():
+    data = request.json
+
+    # Check if required fields are present in the request
+    if 'patient_email' not in data or 'related_patient_email' not in data:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    patient_email = data['patient_email']
+    related_patient_email = data['related_patient_email']
+
+    # Check if the patient emails exist in the database
+    patient = Patient.query.filter_by(email=patient_email).first()
+    related_patient = Patient.query.filter_by(email=related_patient_email).first()
+
+    if not patient or not related_patient:
+        return jsonify({'error': 'Patient not found'}), 404
+
+    # Create the relationship
+    patient.related_to.append(related_patient)
+    db.session.commit()
+
+    return jsonify({'message': 'Relationship created successfully'}), 201
+
 
 
 ###################################

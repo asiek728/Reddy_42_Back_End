@@ -2,7 +2,7 @@ import pytest
 from application import app, db
 from application.conditions.model import Condition
 from application.patients.model import Patient
-
+from application.hereditary_conditions.model import HereditaryCondition
 # Fixture 
 @pytest.fixture
 def client():
