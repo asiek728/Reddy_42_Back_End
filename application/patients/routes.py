@@ -41,20 +41,20 @@ def handle_patient_family(patient_email):
 def handle_user():
    if request.method ==  "POST": return login_user()
 
-@app.route('/all', methods=["GET"])
-@jwt_required()
-def handle_users():
-   if request.method ==  "GET": return get_all_users()
+# @app.route('/all', methods=["GET"])
+# @jwt_required()
+# def handle_users():
+#    if request.method ==  "GET": return get_all_users()
 
-@app.route("/whoami", methods=["GET"])
-@jwt_required()
-def user_info():
-   if request.method ==  "GET": return whoami()
+# @app.route("/whoami", methods=["GET"])
+# @jwt_required()
+# def user_info():
+#    if request.method ==  "GET": return whoami()
 
-@app.route("/refresh", methods=["GET"])
-@jwt_required(refresh=True)
-def refresh_user_token():
-   if request.method ==  "GET": return refresh_access()
+# @app.route("/refresh", methods=["GET"])
+# @jwt_required(refresh=True)
+# def refresh_user_token():
+#    if request.method ==  "GET": return refresh_access()
 
 @app.route("/logout", methods=["GET"])
 @jwt_required(verify_type=False)
@@ -66,7 +66,6 @@ def logout_user_token():
 @app.errorhandler(exceptions.NotFound)
 def handle_404(err):
     return { "error": f"Oops {err}"}, 404
-
 
 @app.errorhandler(exceptions.InternalServerError)
 def handle_500(err):

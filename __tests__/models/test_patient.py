@@ -1,4 +1,5 @@
 from application.patients.model import Patient
+from application.hereditary_conditions.model import HereditaryCondition
 
 def test_create_patient():
     new_patient = Patient(first_name="first_name", last_name="last_name", email="email@email.com", password="password", nhs_number="False", date_of_birth="2024-5-12", sex="M", ethnicity="White")

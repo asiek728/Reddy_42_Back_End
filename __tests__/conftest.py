@@ -19,7 +19,7 @@ def client():
         # Create the database
         db.create_all()
         # Create fake data
-        new_patient = Patient(first_name="first_name", last_name="last_name", email="email", password="password", nhs_number="nhs_number", date_of_birth="date_of_birth", sex="sex", ethnicity="ethnicity")
+        new_patient = Patient(first_name="first_name", last_name="last_name", email="email", password="password", nhs_number="nhs_number", date_of_birth="date_of_birth", sex="sex", ethnicity="ethnicity", )
 
         # Inject it into the database
         db.session.add(new_patient)
