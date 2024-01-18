@@ -2,7 +2,7 @@ from flask import request, jsonify, Blueprint
 from werkzeug import exceptions
 from application import app # app from __init__.
 from .model import Patient
-from .controller import get_patient_info, create_patient,  get_patients, login_user, get_all_users, whoami, refresh_access, logout_user, get_user_family
+from .controller import get_patient_info, create_patient,  get_patients, login_user, get_all_users, whoami, refresh_access, logout_user, get_user_family, create_relationship
 
 from flask_jwt_extended import jwt_required, get_jwt
 
@@ -33,6 +33,10 @@ def handle_patient(patient_email):
 # @jwt_required()
 def handle_patient_family(patient_email):
     if request.method == "GET": return get_user_family(patient_email)
+
+@app.route('/create_relationship', methods=['POST'])
+def handle_adding_family():
+    if request.method == "POST": return create_relationship()
 
 
 ###############################################################

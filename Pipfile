@@ -30,6 +30,7 @@ gunicorn = "*"
 flask-socketio = "*"
 flask-jwt-extended = "*"
 marshmallow = "*"
+flask-cors = "*"
 
 [dev-packages]
 pytest-cov = "*"
