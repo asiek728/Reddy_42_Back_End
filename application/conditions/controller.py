@@ -65,31 +65,31 @@ def create_condition():
     except:
         raise exceptions.BadRequest(f"We cannot process your request")
 
-def update_condition(id):
-    claims = get_jwt()
+# def update_condition(id):
+#     claims = get_jwt()
 
-    if claims.get("is_staff") == True:
-        data = request.json
-        condition = Condition.query.filter_by(id=id).first()
+#     if claims.get("is_staff") == True:
+#         data = request.json
+#         condition = Condition.query.filter_by(id=id).first()
 
-        for (attribute, value) in data.items():
-            if hasattr(condition, attribute):
-                setattr(condition, attribute, value)
+#         for (attribute, value) in data.items():
+#             if hasattr(condition, attribute):
+#                 setattr(condition, attribute, value)
 
-        db.session.commit()
-        return jsonify({ "data": condition.json })
+#         db.session.commit()
+#         return jsonify({ "data": condition.json })
     
-    return jsonify({"message": "You are not authorized to access this"}), 401
+#     return jsonify({"message": "You are not authorized to access this"}), 401
 
 
-def destroy_condition(id): 
-    claims = get_jwt()
+# def destroy_condition(id): 
+#     claims = get_jwt()
 
-    if claims.get("is_staff") == True:
+#     if claims.get("is_staff") == True:
 
-        condition = Condition.query.filter_by(id=id).first()
-        db.session.delete(condition)
-        db.session.commit()
-        return "Condition Deleted", 204
+#         condition = Condition.query.filter_by(id=id).first()
+#         db.session.delete(condition)
+#         db.session.commit()
+#         return "Condition Deleted", 204
 
-    return jsonify({"message": "You are not authorized to access this"}), 401
+#     return jsonify({"message": "You are not authorized to access this"}), 401

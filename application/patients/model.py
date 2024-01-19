@@ -51,8 +51,8 @@ class Patient(db.Model):
         self.sex = sex
         self.ethnicity = ethnicity
     
-    def __repr__(self):
-        return f"My name is {self.first_name} {self.last_name} i was born {self.date_of_birth} and my email is {self.email}"
+    # def __repr__(self):
+    #     return f"My name is {self.first_name} {self.last_name} i was born {self.date_of_birth} and my email is {self.email}"
     
 ###################################################################
     ## AUTH
