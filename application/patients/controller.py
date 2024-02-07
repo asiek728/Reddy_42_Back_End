@@ -94,7 +94,7 @@ def create_relationship():
 # @auth_bp.post("/register")
 ###################################
 def create_patient():
-    # try:
+    try:
     ######################################################
         data = request.get_json()
 
@@ -114,27 +114,27 @@ def create_patient():
     ######################################################
 
         return jsonify({ "data": new_patient.json }), 201
-    # except:
+    except:
         raise exceptions.BadRequest(f"We cannot process your request, sorry :(")
 
 
-# def update_patient(id):
-#     data = request.json
-#     patient = Patient.query.filter_by(id=id).first()
+def update_patient(id):
+    data = request.json
+    patient = Patient.query.filter_by(id=id).first()
 
-#     for (attribute, value) in data.items():
-#         if hasattr(patient, attribute):
-#             setattr(patient, attribute, value)
+    for (attribute, value) in data.items():
+        if hasattr(patient, attribute):
+            setattr(patient, attribute, value)
 
-#     db.session.commit()
-#     return jsonify({ "data": patient.json })
+    db.session.commit()
+    return jsonify({ "data": patient.json })
 
 
-# def destroy_patient(id):
-#     patient = Patient.query.filter_by(id=id).first()
-#     db.session.delete(patient)
-#     db.session.commit()
-#     return "Patient Deleted", 204
+def destroy_patient(id):
+    patient = Patient.query.filter_by(id=id).first()
+    db.session.delete(patient)
+    db.session.commit()
+    return "Patient Deleted", 204
 
 #################################################################
 def login_user():

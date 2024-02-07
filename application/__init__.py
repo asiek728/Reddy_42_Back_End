@@ -21,7 +21,7 @@ app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
 
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=100)
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 
 db = SQLAlchemy(app)
@@ -36,6 +36,7 @@ def user_lookup_callback(_jwt_headers, jwt_data):
 
     return Patient.query.filter_by(email=identity).one_or_none()
 
+
 @jwt.additional_claims_loader
 def make_additional_claims(identity):
     if identity == "NHS@email.com":
@@ -43,9 +44,11 @@ def make_additional_claims(identity):
     return {"is_staff": False}
 
 
+
 @jwt.expired_token_loader
 def expired_token_callback(jwt_header, jwt_data):
     return jsonify({"message": "Token has expired", "error": "token_expired"}), 401
+
 
 @jwt.invalid_token_loader
 def invalid_token_callback(error):
@@ -55,6 +58,7 @@ def invalid_token_callback(error):
         ),
         401,
     )
+
 
 @jwt.unauthorized_loader
 def missing_token_callback(error):
@@ -67,6 +71,7 @@ def missing_token_callback(error):
         ),
         401,
     )
+
 
 @jwt.token_in_blocklist_loader
 def token_in_blocklist_callback(jwt_header,jwt_data):
